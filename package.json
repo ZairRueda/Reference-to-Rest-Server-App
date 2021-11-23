@@ -1,0 +1,17 @@
+{
+  "name": "15-rest-server-profundo",
+  "version": "1.0.0",
+  "description": "* En este proyecto analizaremos a profundidad el rest server \r * Crear estructuras que pocibiliten el crecimineto del producto",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  }
+}
