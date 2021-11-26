@@ -15,9 +15,13 @@
 
 ## Paquetes
 
-* Dotenv > control de variables de entorno
-* Express > Control de servidores
-* Cors > Proteccion para el servidor de una manera superficial (relativamente )
+* Dotenv : control de variables de entorno
+* Express : Control de servidores
+* Cors : Proteccion para el servidor de una manera superficial (relativamente )
+* Mongoose : es un ODM (Object Data Modeling) Un modelador de los objetos de la DB
+    * Es muy usado para evitar injection of sql, limpiar comandos etc
+* bcryptjs : para encriptacion de contraseñas
+* express-validator : validaremos con esto el email
 
 ## Carpetas
 
@@ -29,3 +33,8 @@
     * Los controladores de las rutas
 4. Modules 
     * Los modulos para cada ruta
+
+## Info Relevanete 
+
+Estamos conectando nuestro proyecto a una base de datos MongoDB
+En este proyecto crearemos un modelo de una coleccione
