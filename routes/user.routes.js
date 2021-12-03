@@ -28,7 +28,7 @@ router.put('/:id', [
 // but if you want, some middle, you have to write an array
 // 
 router.post('/', [
-    // If you want deny a function you want to use function .not()
+    // If you need deny a function you want to use function .not()
     check('name', 'Name is several requiret').not().isEmpty(),
     check('password', 'Password is several requiret and must have 6 letters').isLength({min: 6}),
     check('email', 'Email is not valid').isEmail(),
@@ -40,7 +40,11 @@ router.post('/', [
 
 // TODO in the last class i see the validation of all parametters
 
-router.delete('/', usuariosDelete)
+router.delete('/:id',[
+    check('id', 'Is not a validate id ').isMongoId(),
+    check('id').custom(isThereIdInDB),
+    validarCampos
+],usuariosDelete)
 
 router.patch('/', usuariosPatch)
 
