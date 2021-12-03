@@ -2,39 +2,61 @@
 
 const { response, request } = require('express')
 const bcryptjs = require('bcryptjs');
-const { check } = require('express-validator')
 
 // In thes cases, i put the first letter in uppercase because i can instans the result
 const User = require('../models/user.model');
 const { emailExist } = require('../helpers/db-validators.help');
 
 //Route GET
-const usuariosGet = (req = request, res = response) => {
+const usuariosGet = async(req = request, res = response) => {
 
     // Usar Query Params
     // La ventaja con la destructuracion es que nos permite crear valores por defout
-    const {q, nombre = 'Andres', apikey} = req.query
+    // const {q, nombre = 'Andres', apikey} = req.query
+
+    //Destructuring Request dot query
+    const { limit = 5, from = 5} = req.query
+    const query = {state: true}
+
+    
+    // Get all users 
+    // If we wanth olways the items which have state on true, we need add a conditional
+    // In this point we have {state: true}
+    const users = await User.find(query)
+        // jump to any position infront of object
+        .skip(parseInt(from))
+        // limit at quantity of objects to get
+        .limit(parseInt(limit))
+
+    const total = await User.countDocuments(query)
+    
 
     res.json({
-        msg: 'get API - Controlador',
-        q,
-        nombre,
-        apikey
+        total,
+        users
     })
 }
 
 // Route PUT
-const usuariosPut = (req, res = response) => {
+const usuariosPut = async(req, res = response) => {
 
-    // Caundo querramos nandar parametros HTTP
-    // Ya habiendo agregado la variable al path 
-    // express parsea el valor nos los entrega en el objeto reques
-    const id = req.params.id
+    // Get value of element received in frontend
+    const { id } = req.params
 
-    res.json({
-        msg: 'put API',
-        id
-    })
+    const { _id, password, google, ...rem } = req.body
+
+    
+    // TODO validate on data bases
+    if (password) {
+        // Hash Password
+        const salt = bcryptjs.genSaltSync(10)
+        rem.password = bcryptjs.hashSync(password, salt)
+    }
+
+    // .findByIdAndUpdate is a fuction of mongo
+    const user = await User.findByIdAndUpdate( id, rem )
+
+    res.json(user)
 }
 
 // Route POST

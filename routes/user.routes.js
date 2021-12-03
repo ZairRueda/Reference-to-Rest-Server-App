@@ -7,7 +7,7 @@ const {
     usuariosDelete,
     usuariosPatch
 } = require('../controllers/user.controller')
-const { isRoleValidate, emailExist } = require('../helpers/db-validators.help')
+const { isRoleValidate, isThereEmail, isThereIdInDB } = require('../helpers/db-validators.help')
 const { validarCampos } = require('../middlewares/validar_campos.middle')
 
 const router = Router()
@@ -16,7 +16,12 @@ const router = Router()
 router.get('/', usuariosGet)
 
 // Si queremos pasarle un argumento al path se agrega despues de :
-router.put('/', usuariosPut)
+router.put('/:id', [
+    check('id', 'Is not a validate id ').isMongoId(),
+    check('id').custom(isThereIdInDB),
+    check('role').custom(isRoleValidate),
+    validarCampos
+], usuariosPut)
 
 // define a middleware, it,s the second parameter
 // if you want only middel, you have to write single < , somenamemiddel , >
@@ -27,8 +32,8 @@ router.post('/', [
     check('name', 'Name is several requiret').not().isEmpty(),
     check('password', 'Password is several requiret and must have 6 letters').isLength({min: 6}),
     check('email', 'Email is not valid').isEmail(),
-    check('email').custom(emailExist),
-    // check('role', 'Its not a validate Role').isIn(['ADMIN_ROLE', 'USER_ROLE'])
+    check('email').custom(isThereEmail),
+    // check('role', 'Its not a validate Role').isIn(['ADMIN_ROLE', 'USER_ROLE']),
     check('role').custom(isRoleValidate),
     validarCampos
 ],usuariosPost)

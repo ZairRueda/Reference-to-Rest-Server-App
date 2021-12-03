@@ -1,8 +1,23 @@
 # REST Server 
 
+## Intall
+
+> npm install
+
+## After Install (Start)
+
+> node app
+
+If you want your app stay alive install Nodemon
+
+> npm install -g nodemon
+
+like this you can see the bugs
+
+### Data
+
 * En este proyecto analizaremos a profundidad el rest server 
 * Crear estructuras que pocibiliten el crecimineto del producto
-
 * Estareamos creando modelos, vistas y controladores
 
 ### Tipos de peticiones HTTP
@@ -38,3 +53,9 @@
 
 Estamos conectando nuestro proyecto a una base de datos MongoDB
 En este proyecto crearemos un modelo de una coleccione
+
+## Notas
+
+* Backend 
+    Los usuarios ya no se eliminan el de las bases de datos, por que dicho pudo a 
+    haber creado instancias necesarias

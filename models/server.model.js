@@ -11,7 +11,7 @@ class Server{
 
         // Para saber que rutas contiene el servidor
         // here we get the behind info
-        this.usuariosPath = '/api/usuarios'
+        this.usuariosPath = '/api/users'
 
         // Conectar a DB
         this.conectarDB()
@@ -51,7 +51,7 @@ class Server{
 
     listen(){
         this.app.listen( this.port, () => {
-            console.log('Servidor Corriendo en puerto', this.port);
+            console.log('Server running at port', this.port);
         })
     }
 }
