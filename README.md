@@ -54,6 +54,29 @@ like this you can see the bugs
 Estamos conectando nuestro proyecto a una base de datos MongoDB
 En este proyecto crearemos un modelo de una coleccione
 
+* Variables de entorno en servidor 
+
+Por motivos de seguridad las variables de entorno del servidor no se guardan para 
+eso se crean en el mismo config de heroku
+
+### Pasos
+
+Para saber las variables de entorno que existen 
+
+` heroku config `
+
+agregar variable de entorno
+
+` heroku config:set ejemplo="valorVariable" `
+
+obtener valor
+
+` heroku config:get ejemplo `
+
+borrar variable de entorno
+
+` heroku config:unset ejemplo `
+
 ## Notas
 
 * Backend 
