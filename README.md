@@ -77,6 +77,19 @@ borrar variable de entorno
 
 ` heroku config:unset ejemplo `
 
+## User Interface With Json Web Token
+
+1. To act as save the info of user, but its not for save sensitive information
+
+## Ways of used
+
+1. Session user
+    * Pero realentizaria el servidor
+    * Para optimizar esas variables se usan los Json web Tokens 
+        * este incluye header, payload, y la firma
+2. Validate Session 
+    * This way require a end date, and more hash data 
+
 ## Notas
 
 * Backend 

@@ -9,6 +9,8 @@ class Server{
         this.app = express()
         this.port = process.env.PORT
 
+        // JSON Web Token
+
         // Para saber que rutas contiene el servidor
         // here we get the behind info
         this.usuariosPath = '/api/users'
