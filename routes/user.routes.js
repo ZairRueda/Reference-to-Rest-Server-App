@@ -14,9 +14,12 @@ const {
     isThereIdInDB 
 } = require('../helpers/db-validators.help')
 
-const { jwtValidate } = require('../middlewares/validar-jwt.middle')
-const { validarCampos } = require('../middlewares/validar-campos.middle')
-const { isAdminRole } = require('../middlewares/validar-role.middle')
+const { 
+    jwtValidate,
+    validarCampos,
+    isAdminRole, 
+    haveARole
+} = require('../middlewares')
 
 const router = Router()
 
@@ -50,7 +53,8 @@ router.post('/', [
 
 router.delete('/:id',[
     jwtValidate,
-    isAdminRole,
+    // isAdminRole,
+    haveARole('ADMIN_ROLE', 'SELLER_ROLE'),
     check('id', 'Is not a validate id ').isMongoId(),
     check('id').custom(isThereIdInDB),
     validarCampos
