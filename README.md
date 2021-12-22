@@ -37,6 +37,7 @@ like this you can see the bugs
     * Es muy usado para evitar injection of sql, limpiar comandos etc
 * bcryptjs : para encriptacion de contraseñas
 * express-validator : validaremos con esto el email
+* JsonWebToken : nos servira para la crear tokens
 
 ## Carpetas
 
@@ -95,3 +96,7 @@ borrar variable de entorno
 * Backend 
     Los usuarios ya no se eliminan el de las bases de datos, por que dicho pudo a 
     haber creado instancias necesarias
+
+* Request in the functions
+    Es una instancia que podemos ir modificando con forme se va ejecutando la ruta, si enn una funcion superior 
+    le agregamos algo en una funcion inferior lo podemos mandar traer

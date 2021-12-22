@@ -82,6 +82,8 @@ const usuariosPost = async(req = request, res = response) => {
 // Route DELETE
 const usuariosDelete = async(req, res = response) => {
 
+    // console.log(req);
+
     const { id } = req.params
 
     // Delete physically (no use, no recomend)
@@ -90,10 +92,12 @@ const usuariosDelete = async(req, res = response) => {
     // Change state
     const user = await User.findByIdAndUpdate(id, {state: false})
 
-    res.json({
-        id,
-        user
-    })
+    
+    // Get user auth here, For verify if its Admin User
+    const userAuth = req.user
+
+    // and print userAuth 
+    res.json({ user, userAuth})
 }
 
 // Route PATCH

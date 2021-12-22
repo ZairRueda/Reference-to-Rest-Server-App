@@ -4,17 +4,17 @@ En mongo a diferencia de las baces relacionales se guarda en forma de objetos (o
 y estos se guarda en corecciones (tablas)
 
 {
-    nombre: 'Correo',
-    correo: 'correo@correo.com',
+    name: 'something',
+    email: 'email@email.com',
     password: 'jnasd834299hjw23791',
-    imagen: 'public/img/imagen.jpg',
+    img: 'public/img/img.jpg',
     role: '9292828348',
-    estado: false,
+    state: false,
     google: false
 }
 
-estado : si el usuario esta auteenticado
-google : si el usuario fue agregado por medio de google
+estate : if the user is authenticated
+google : if the user is make whit google
 */
 
 const { Schema, model } = require('mongoose');
@@ -55,10 +55,12 @@ const UserSchema = Schema({
 
 });
 
-// For remove a password and version
+// For remove a password and version when we require a user
+// this model modify all structure of user Schema when we want a request
 UserSchema.methods.toJSON = function() {
-    const { __v, password, ...usuario } = this.toObject();
-    return usuario
+    const { __v, password, _id, ...user } = this.toObject();
+    user.uid = _id
+    return user
 }
 
 // We export a function of model

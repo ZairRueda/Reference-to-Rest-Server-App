@@ -7,8 +7,16 @@ const {
     usuariosDelete,
     usuariosPatch
 } = require('../controllers/user.controller')
-const { isRoleValidate, isThereEmail, isThereIdInDB } = require('../helpers/db-validators.help')
-const { validarCampos } = require('../middlewares/validar_campos.middle')
+
+const { 
+    isRoleValidate, 
+    isThereEmail, 
+    isThereIdInDB 
+} = require('../helpers/db-validators.help')
+
+const { jwtValidate } = require('../middlewares/validar-jwt.middle')
+const { validarCampos } = require('../middlewares/validar-campos.middle')
+const { isAdminRole } = require('../middlewares/validar-role.middle')
 
 const router = Router()
 
@@ -41,6 +49,8 @@ router.post('/', [
 // TODO in the last class i see the validation of all parametters
 
 router.delete('/:id',[
+    jwtValidate,
+    isAdminRole,
     check('id', 'Is not a validate id ').isMongoId(),
     check('id').custom(isThereIdInDB),
     validarCampos
