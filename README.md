@@ -78,6 +78,16 @@ borrar variable de entorno
 
 ` heroku config:unset ejemplo `
 
+### Mas de Heroku
+
+Si queremos ver los impreciones en consola o los logs de heroku por cantida ejem ultimos 100
+
+` heroku logs -n 100 `
+
+Si los queremos en tiempo real
+
+` heroku logs -n 100 --tail ` 
+
 ## User Interface With Json Web Token
 
 1. To act as save the info of user, but its not for save sensitive information
