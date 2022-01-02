@@ -4,9 +4,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Denegado</title>
+    <title>Google SignIn</title>
+    <meta name="google-signin-client_id" content="213571346093-ib94npj8itbgm1j79fjvqjp3v6tsejiv.apps.googleusercontent.com">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Hola Mundo</h1>
+
+    <header>
+        <h1>Google Sign In</h1>
+    </header>
+
+    <main>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+        <a class="logOut" href="#" onclick="signOut();">Sign out</a>
+
+    </main>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <script>
+
+        const url = (window.location.hostname.includes('localhost')) ? 'http://localhost:8080/api/auth/google' : 'https://referens-server-app.herokuapp.com/api/auth/google';
+
+
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+            var id_token = googleUser.getAuthResponse().id_token;
+            const data = {id_token};
+
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            })
+            .then( resp => resp.json())
+            .then( data => console.log('Nuestro Server', data))
+            .catch(console.log)
+            // In some library it is presented as a code similar to this
+             /*
+                // var xhr = new XMLHttpRequest();
+                //     xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
+                //     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                //     xhr.onload = function() {
+                //     console.log('Signed in as: ' + xhr.responseText);
+                // };
+
+                // xhr.send('idtoken=' + id_token);
+            */
+            
+        }
+       
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+            });
+        }
+    </script>
 </body>
 </html>
