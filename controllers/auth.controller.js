@@ -59,14 +59,48 @@ const googleSignIn = async (req, res = response) => {
 
     const { id_token } = req.body;
 
-    const googleUser = await googleVerify(id_token)
-
-    console.log(googleUser);
+    // console.log(id_token);
 
     try {
+
+        const {name, img, email} = await googleVerify(id_token)
+
+        
+
+        let user = await User.findOne({ email})
+
+        // console.log(user);
+
+        if (!user) {
+            // I want to make a user
+            const data = {
+                name,
+                email,
+                password: ':p',
+                img,
+                google: true
+            }
+
+            user = new User(data)
+
+            
+            
+            await user.save()
+        }
+
+        // If user have state in False, i need cancel you auth
+        if (!user.state) {
+            return res.status(401).json({
+                msg: "talk with admins or send a email, user blocked"
+            })
+        }
+
+        
+        const token = await makeJWT(user.id)
+
         res.json({
-            msg: 'Todo Ok! Google SignIn',
-            googleUser
+            user,
+            token
         })
     } catch (error) {
         res.status(400).json({
