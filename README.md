@@ -101,6 +101,25 @@ Si los queremos en tiempo real
 2. Validate Session 
     * This way require a end date, and more hash data 
 
+## SignIn Google (Registro con Google)
+
+* El procedimiento para integrar un sign in es igual en cualquier servicio que lo permita (facebook, twitter etc)
+
+Instalamos el packete necesario
+
+`npm install google-auth-library --save`
+
+Seguimos las instrucciones de uso 
+* todos funcionan a vace a una promesa , usamos fetch, y son divididos entre la intregracion de frontend y la del backend
+
+1. FrontEnd 
+    * Contiene el fetch, este es enviado por medio de POST
+2. BackEnd 
+    * Hacemos las comprobaciones del Id_token
+    * Lo pasamos al controlador y hacemos la verificacion del token con los servidores de google
+    * Organizamos la informacion si es necesario para que encaje con nuestra bace de datos 
+    * Comparamos la info con nuestra bace de datos
+
 ## Notas
 
 * Backend 
