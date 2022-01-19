@@ -9,12 +9,13 @@ class Server{
         this.app = express()
         this.port = process.env.PORT
 
-        // Para saber que rutas contiene el servidor
-        // here we get the behind info
-        this.usuariosPath = '/api/users'
-
-        // JSON Web Token Autenticate Route
-        this.authPath = '/api/auth'
+        // Antes teniamos un Path por ruta, pero si queremos escalar
+        // se nos llenaria de rutas, solucion - crear un objeto
+        this.paths = {
+            auth: '/api/auth', // JSON Web Token Autenticate Route
+            users: '/api/users', // Para saber que rutas contiene el servidor - here we get the behind info
+            categories: '/api/categories'
+        }
 
         // Conectar a DB
         this.conectarDB()
@@ -49,9 +50,11 @@ class Server{
     // Rutas del sistema
     routes(){
         // Ruta de autenticacion
-        this.app.use(this.authPath , require('../routes/auth.routes'))
+        this.app.use(this.paths.auth , require('../routes/auth.routes'))
         // Mandamos traer las rutas
-        this.app.use(this.usuariosPath , require('../routes/user.routes'))
+        this.app.use(this.paths.users , require('../routes/user.routes'))
+        
+        this.app.use(this.paths.categories , require('../routes/categories.routes'))
     }
 
     listen(){
