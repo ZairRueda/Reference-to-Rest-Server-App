@@ -1,11 +1,11 @@
 const { Router } = require('express')
 const { check } = require('express-validator')
 const { 
-    usuariosGet, 
-    usuariosPut, 
-    usuariosPost,
-    usuariosDelete,
-    usuariosPatch
+    usersGet, 
+    usersPut, 
+    usersPost,
+    usersDelete,
+    usersPatch
 } = require('../controllers/user.controller')
 
 const { 
@@ -16,23 +16,23 @@ const {
 
 const { 
     jwtValidate,
-    validarCampos,
+    validateFields,
     isAdminRole, 
     haveARole
 } = require('../middlewares')
 
 const router = Router()
 
-// Este codigo no es escalable, esta todo junto
-router.get('/', usuariosGet)
+// This code isn't scalable, because it's all together
+router.get('/', usersGet)
 
-// Si queremos pasarle un argumento al path se agrega despues de :
+// If we want send an argument, we need put it up after this " : "
 router.put('/:id', [
     check('id', 'Is not a validate id ').isMongoId(),
     check('id').custom(isThereIdInDB),
     check('role').custom(isRoleValidate),
-    validarCampos
-], usuariosPut)
+    validateFields
+], usersPut)
 
 // define a middleware, it,s the second parameter
 // if you want only middel, you have to write single < , somenamemiddel , >
@@ -46,8 +46,8 @@ router.post('/', [
     check('email').custom(isThereEmail),
     // check('role', 'Its not a validate Role').isIn(['ADMIN_ROLE', 'USER_ROLE']),
     check('role').custom(isRoleValidate),
-    validarCampos
-],usuariosPost)
+    validateFields
+], usersPost)
 
 // TODO in the last class i see the validation of all parametters
 
@@ -57,10 +57,10 @@ router.delete('/:id',[
     haveARole('ADMIN_ROLE', 'SELLER_ROLE'),
     check('id', 'Is not a validate id ').isMongoId(),
     check('id').custom(isThereIdInDB),
-    validarCampos
-],usuariosDelete)
+    validateFields
+], usersDelete)
 
-router.patch('/', usuariosPatch)
+router.patch('/', usersPatch)
 
 
 module.exports = router

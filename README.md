@@ -120,6 +120,10 @@ Seguimos las instrucciones de uso
     * Organizamos la informacion si es necesario para que encaje con nuestra bace de datos 
     * Comparamos la info con nuestra bace de datos
 
+## Categories Integration - Notas
+
+* Si se asocia a un usuario  (o un modelo) con otro modelo, este tiene que ser tipo Schema.Types.ObjectId 
+
 ## Notas
 
 * Backend 

@@ -5,10 +5,9 @@ const bcryptjs = require('bcryptjs');
 
 // In thes cases, i put the first letter in uppercase because i can instans the result
 const User = require('../models/user.model');
-const { emailExist } = require('../helpers/db-validators.help');
 
 //Route GET
-const usuariosGet = async(req = request, res = response) => {
+const usersGet = async(req = request, res = response) => {
 
     // Usar Query Params
     // La ventaja con la destructuracion es que nos permite crear valores por defout
@@ -37,7 +36,7 @@ const usuariosGet = async(req = request, res = response) => {
 }
 
 // Route PUT
-const usuariosPut = async(req, res = response) => {
+const usersPut = async(req, res = response) => {
 
     // Get value of element received in frontend
     const { id } = req.params
@@ -59,7 +58,7 @@ const usuariosPut = async(req, res = response) => {
 }
 
 // Route POST
-const usuariosPost = async(req = request, res = response) => {
+const usersPost = async(req = request, res = response) => {
 
     const { name, email, password, role } = req.body
     // If we want  get rest info  const { name, ...rest } = req.body
@@ -80,7 +79,7 @@ const usuariosPost = async(req = request, res = response) => {
 }
 
 // Route DELETE
-const usuariosDelete = async(req, res = response) => {
+const usersDelete = async(req, res = response) => {
 
     // console.log(req);
 
@@ -101,16 +100,16 @@ const usuariosDelete = async(req, res = response) => {
 }
 
 // Route PATCH
-const usuariosPatch = (req, res = response) => {
+const usersPatch = (req, res = response) => {
     res.json({
         msg: 'patch API'
     })
 }
 
 module.exports = {
-    usuariosGet,
-    usuariosPut,
-    usuariosPost,
-    usuariosDelete,
-    usuariosPatch
+    usersGet,
+    usersPut,
+    usersPost,
+    usersDelete,
+    usersPatch
 }

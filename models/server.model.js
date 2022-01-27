@@ -14,7 +14,8 @@ class Server{
         this.paths = {
             auth: '/api/auth', // JSON Web Token Autenticate Route
             users: '/api/users', // Para saber que rutas contiene el servidor - here we get the behind info
-            categories: '/api/categories'
+            categories: '/api/categories',
+            products: '/api/products'
         }
 
         // Conectar a DB
@@ -49,17 +50,19 @@ class Server{
 
     // Rutas del sistema
     routes(){
-        // Ruta de autenticacion
+        // Routs about Autentication
         this.app.use(this.paths.auth , require('../routes/auth.routes'))
-        // Mandamos traer las rutas
+        // Routs about User
         this.app.use(this.paths.users , require('../routes/user.routes'))
-        
+        // Routs about Category
         this.app.use(this.paths.categories , require('../routes/categories.routes'))
+        // Routs about Product
+        this.app.use(this.paths.products , require('../routes/products.routes'))
     }
 
     listen(){
         this.app.listen( this.port, () => {
-            console.log('Server running at port', this.port);
+            console.log('Server is running at port', this.port);
         })
     }
 }

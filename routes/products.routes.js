@@ -1,14 +1,14 @@
 const { Router } = require('express')
 const { check } = require('express-validator')
 const { 
-    categoriesPost, 
-    categoriesGet, 
-    categoriesGetById,
-    categoriesPut,
-    categoriesDelete
-} = require('../controllers/categories.controller')
+    productsPost, 
+    productsGet, 
+    productsGetById,
+    productsPut,
+    productsDelete
+} = require('../controllers/products.controller')
 
-const { verifyIdCategory } = require('../helpers/category-validators.help')
+const { verifyIdProduct } = require('../helpers/product-validators.help')
 
 const { 
     jwtValidate, 
@@ -23,39 +23,41 @@ const router = Router()
  * {{url}}/api/categorias
 */
 
-// Obtener todas las categorias - publico
-router.get('/', categoriesGet)
+// Get it all products - public
+router.get('/', productsGet)
 
-// Obtener una categoria por ID - publico
+// Get It product by ID - public
 router.get('/:id', [
     check('id', 'Is not a validate id ').isMongoId(),
-    check('id').custom(verifyIdCategory),
+    check('id').custom(verifyIdProduct),
     validateFields
-], categoriesGetById)
+], productsGetById)
 
-// Crear categoria - Privado - cualquiera con un toquen valido
+// Make a product - Privado - cualquiera con un toquen valido
 router.post('/', [
     jwtValidate,
     check('name', 'The Name is required').not().isEmpty(),
+    check('category', 'The category is required').not().isEmpty(),
+    check('description', 'The description is required').not().isEmpty(),
     validateFields
-], categoriesPost)
+], productsPost)
 
-// Actializar - Privado - Cualquiera con toquen valido
+// Update Product - Privado - Cualquiera con toquen valido
 router.put('/:id', [
     jwtValidate,
     check('id', 'Is not a validate id ').isMongoId(),
-    check('id').custom(verifyIdCategory),
+    check('id').custom(verifyIdProduct),
     check('name', 'The Name is required').not().isEmpty(),
     validateFields
-], categoriesPut)
+], productsPut)
 
-// Borrar una categoria - Administrador
+// Delete Product - Administrador
 router.delete('/:id', [
     jwtValidate,
     isAdminRole,
     check('id', 'Is not a validate id ').isMongoId(),
-    check('id').custom(verifyIdCategory),
+    check('id').custom(verifyIdProduct),
     validateFields
-], categoriesDelete)
+], productsDelete)
 
 module.exports = router
