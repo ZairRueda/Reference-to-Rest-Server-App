@@ -15,7 +15,8 @@ class Server{
             auth: '/api/auth', // JSON Web Token Autenticate Route
             users: '/api/users', // Para saber que rutas contiene el servidor - here we get the behind info
             categories: '/api/categories',
-            products: '/api/products'
+            products: '/api/products',
+            search: '/api/search'
         }
 
         // Conectar a DB
@@ -51,13 +52,15 @@ class Server{
     // Rutas del sistema
     routes(){
         // Routs about Autentication
-        this.app.use(this.paths.auth , require('../routes/auth.routes'))
+        this.app.use(this.paths.auth       , require('../routes/auth.routes'))
         // Routs about User
-        this.app.use(this.paths.users , require('../routes/user.routes'))
+        this.app.use(this.paths.users      , require('../routes/user.routes'))
         // Routs about Category
         this.app.use(this.paths.categories , require('../routes/categories.routes'))
         // Routs about Product
-        this.app.use(this.paths.products , require('../routes/products.routes'))
+        this.app.use(this.paths.products   , require('../routes/products.routes'))
+        // For search anythings
+        this.app.use(this.paths.search     , require('../routes/search.routes'))
     }
 
     listen(){
