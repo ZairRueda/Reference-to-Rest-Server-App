@@ -124,6 +124,26 @@ Seguimos las instrucciones de uso
 
 * Si se asocia a un usuario  (o un modelo) con otro modelo, este tiene que ser tipo Schema.Types.ObjectId 
 
+## Busqueda 
+
+* La busqueda con MongoDB es muy parecida a otras bases de datos se le pasan ciertos parametros que debe de cumplir la busqueda deseada
+* Para hacer una busqueda sensoble podemos ayudarnos con una funcion de node `cosnt regex = new RegExp(param, 'i') `
+* Podemos añadir a los requerimentos de busqueda mas parametros para que el buscador revice por categoria 
+
+### Operadores logicos - Busquedas Especificas
+
+* Mongo cuenta con operadores logicos que facilitan la integracion de una busqueda
+    * $and
+    * $not
+    * $nor
+    * $or
+* [Mas informacion de optros operadores](https://docs.mongodb.com/manual/reference/operator/query/)
+
+## Subida de archivos 
+
+* Usamos una libreria de express llamada [fileUpload](https://www.npmjs.com/package/express-fileupload)
+
+
 ## Notas
 
 * Backend 

@@ -8,14 +8,12 @@ const {
     categoriesDelete
 } = require('../controllers/categories.controller')
 
-const { verifyIdCategory } = require('../helpers/category-validators.help')
-
 const { 
+    verifyIdCategory,
     jwtValidate, 
-    isAdminRole 
+    isAdminRole,
+    validateFields
 } = require('../middlewares')
-
-const { validateFields } = require('../middlewares')
 
 const router = Router() 
 

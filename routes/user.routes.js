@@ -12,7 +12,7 @@ const {
     isRoleValidate, 
     isThereEmail, 
     isThereIdInDB 
-} = require('../helpers/db-validators.help')
+} = require('../helpers')
 
 const { 
     jwtValidate,

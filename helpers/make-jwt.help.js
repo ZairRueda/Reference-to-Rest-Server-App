@@ -26,6 +26,4 @@ const makeJWT = ( uid = '') => {
 
 }
 
-module.exports = {
-    makeJWT
-}
+module.exports = makeJWT

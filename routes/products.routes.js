@@ -8,14 +8,13 @@ const {
     productsDelete
 } = require('../controllers/products.controller')
 
-const { verifyIdProduct } = require('../helpers/product-validators.help')
 
 const { 
+    validateFields,
     jwtValidate, 
-    isAdminRole 
+    isAdminRole,
+    verifyIdProduct
 } = require('../middlewares')
-
-const { validateFields } = require('../middlewares')
 
 const router = Router() 
 
