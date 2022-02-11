@@ -5,15 +5,22 @@ const {
     updateField
 } = require('../controllers/uploads.controller')
 const { collectionAllow } = require('../helpers')
-const { validateFields } = require('../middlewares')
+const { 
+    validateFields, 
+    validateFilesIsntEmpty 
+} = require('../middlewares')
 
 const router = Router()
 
-router.post('/', [], loadField)
+router.post('/', [
+    validateFilesIsntEmpty,
+    validateFields
+], loadField)
 
 router.put('/:collection/:id', [
     check('id', 'Is not a validate id ').isMongoId(),
     check('collection').custom( c => collectionAllow(c, ['users', 'products'])),
+    validateFilesIsntEmpty,
     validateFields
 ], updateField)
 

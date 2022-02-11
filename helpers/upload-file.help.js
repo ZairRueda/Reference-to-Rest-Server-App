@@ -24,7 +24,7 @@ const uploadFile = ( files, extensionAllow, field = '' ) => {
                 return reject(err)
             };
         
-            resolve(uploadPath)
+            resolve(nameTemporary)
         })
     }) 
 }
