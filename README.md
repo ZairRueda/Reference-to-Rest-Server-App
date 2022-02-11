@@ -153,3 +153,8 @@ Seguimos las instrucciones de uso
 * Request in the functions
     Es una instancia que podemos ir modificando con forme se va ejecutando la ruta, si enn una funcion superior 
     le agregamos algo en una funcion inferior lo podemos mandar traer
+
+* Parametros que resive una funcion
+    En el caso de las funciones en las rutas siempre resiven (req = requerimientos, res = la respuesta del servidor)
+    Pero tambien existe Next, este es mayormente usado en los Middlewares este nos sirve para dar continuidad a el ciclo de ejecucion
+    Los Middlewares siempre den recivir (req, res, next)

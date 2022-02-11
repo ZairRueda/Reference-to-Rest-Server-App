@@ -23,6 +23,17 @@ const loadField = async(req, res = response) => {
     
 }
 
+const updateField = (req, res = response) => {
+
+    const {collection, id} = req.params
+
+    res.json({
+        collection,
+        id
+    })
+}
+
 module.exports = { 
-    loadField
+    loadField,
+    updateField
 }

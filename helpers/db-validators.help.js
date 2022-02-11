@@ -25,8 +25,20 @@ const isThereIdInDB = async(id = '') => {
     }
 }
 
+const collectionAllow = (collection = '', allowedCollections = []) => {
+
+    const allowed = allowedCollections.includes(collection)
+
+    if(!allowed) {
+        throw new Error(`The collection with this Name ${collection} is not allowed`)
+    }
+
+    return true
+}
+
 module.exports = {
     isRoleValidate,
     isThereEmail,
-    isThereIdInDB
+    isThereIdInDB,
+    collectionAllow
 }

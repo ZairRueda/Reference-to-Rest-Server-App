@@ -1,7 +1,7 @@
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-const uploadFile = ( files, extensionAlow, field = '' ) => {
+const uploadFile = ( files, extensionAllow, field = '' ) => {
 
     return new Promise((resolve, reject) => { 
         
@@ -10,8 +10,8 @@ const uploadFile = ( files, extensionAlow, field = '' ) => {
         const cutName = file.name.split('.')
         const extension = cutName[cutName.length - 1]
 
-        if (!extensionAlow.includes(extension)) {
-            return reject(`Error extension ${extension} isnt alowed, upload something like this ${extensionAlow}`)
+        if (!extensionAllow.includes(extension)) {
+            return reject(`Error extension ${extension} isnt alowed, upload something like this ${extensionAllow}`)
         }
 
         const nameTemporary = uuidv4() + '.' + extension;
