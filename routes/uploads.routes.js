@@ -2,7 +2,9 @@ const { Router } = require('express')
 const { check } = require('express-validator')
 const { 
     loadField,
-    updateField
+    updateField,
+    getFile,
+    updateFieldCloudinary
 } = require('../controllers/uploads.controller')
 const { collectionAllow } = require('../helpers')
 const { 
@@ -22,6 +24,12 @@ router.put('/:collection/:id', [
     check('collection').custom( c => collectionAllow(c, ['users', 'products'])),
     validateFilesIsntEmpty,
     validateFields
-], updateField)
+], updateFieldCloudinary)
+
+router.get('/:collection/:id', [
+    check('id', 'Is not a validate id ').isMongoId(),
+    check('collection').custom( c => collectionAllow(c, ['users', 'products'])),
+    validateFields
+], getFile)
 
 module.exports = router

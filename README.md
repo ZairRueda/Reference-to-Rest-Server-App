@@ -143,6 +143,11 @@ Seguimos las instrucciones de uso
 
 * Usamos una libreria de express llamada [fileUpload](https://www.npmjs.com/package/express-fileupload)
 
+## Guardado de Imagenes
+
+* Es usual que al guardar imagenes usemos un servidor aparte para mejor performanse y evitar posibles fallas
+* Para esto usaremos Claudinary, haciendo uso de su API y su libreria
+` npm i cloudinary `
 
 ## Notas
 
